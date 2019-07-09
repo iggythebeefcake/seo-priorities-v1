@@ -7,12 +7,12 @@ const filterLink = (current, name, setFilter ) => {
     return <span onClick={ () => setFilter(name) }>{name}</span>
 }
 
-const Footer = ({ filter, setFilter }) => (
+const TaskFilter = ({ filter, setFilter }) => (
   <div>
     {
-      ['All', 'Active', 'Complete'].map( f => filterLink( filter, f, setFilter) )
+      ['All ', 'Active ', 'Complete '].map( f => filterLink( filter, f, setFilter) )
     }
   </div>
 )
 
-export default Footer;
+export default TaskFilter;

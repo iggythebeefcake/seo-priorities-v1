@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import List from './components/priorities/List';
 import TaskForm from './components/priorities/TaskForm';
-import Footer from './components/priorities/Footer';
+import TaskFilter from './components/priorities/TaskFilter';
+
 
 class App extends Component {
   state = {
@@ -16,9 +17,9 @@ class App extends Component {
   visibleItems = () => {
     const { tasks, filter } = this.state;
     switch(filter) {
-      case 'Active':
+      case "Active ":
         return tasks.filter( t => !t.complete )
-      case 'Completed':
+      case "Complete ":
         return tasks.filter( t => t.complete )
       default:
         return tasks;
@@ -30,7 +31,7 @@ class App extends Component {
   }
 
   handleClick = (id) => {
-    const { tasks } = this.setState
+    const { tasks } = this.state
     this.setState({
       tasks: tasks.map( task => {
         if (task.id === id) {
@@ -44,12 +45,6 @@ class App extends Component {
     })
   }
 
-  addItem = (name) => {
-    const { tasks } = this.state
-    const newTask = { id: this.getUniqId(), name, complete: false }
-    this.setState({ tasks: [newTask, ...tasks] })
-  }
-
   getUniqId = () => {
     // NOTE We are just using this as a helper function 
     // for id's since we aren't using a db yet
@@ -58,13 +53,20 @@ class App extends Component {
     .substring(1);
   }
 
+  addItem = (name) => {
+    const { tasks } = this.state
+    const newTask = { id: this.getUniqId(), name, complete: false }
+    this.setState({ tasks: [newTask, ...tasks] })
+  }
+
   render() {
     const { tasks, filter } = this.state
     return (
       <div>
         <TaskForm addItem={this.addItem} />
+        <h1>SEO Priorities List</h1>
+        <TaskFilter filter={filter} setFilter={this.setFilter} />
         <List name='SEO Priorities List' items={this.visibleItems()} taskClick={this.handleClick} />
-        <Footer filter={filter} setFilter={this.setFilter} />
       </div>
     );
   }

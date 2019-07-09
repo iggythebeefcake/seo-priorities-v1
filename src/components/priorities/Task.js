@@ -5,7 +5,8 @@ const styles = {
     cursor: 'pointer',
   },
   complete: {
-    color: 'grey', textDecoration: 'line-through',
+    color: 'grey', 
+    textDecoration: 'line-through',
   }
 }
 
@@ -14,7 +15,7 @@ const Task = ({ id, name, complete, taskClick }) => (
     style={complete ? { ...styles.task, ...styles.complete } : styles.task }
     onClick={ () => taskClick(id) }
   >
-    {name}
+    { name }
   </li>
 )
 
